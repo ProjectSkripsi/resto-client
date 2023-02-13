@@ -1,0 +1,14 @@
+.content {
+  margin-top: 13rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media screen and (max-width: 1007px) {
+  .content {
+    margin-top: 7rem;
+  }
+}

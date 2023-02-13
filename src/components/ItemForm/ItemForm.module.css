@@ -1,0 +1,14 @@
+.form {
+  font-size: small;
+  text-align: right;
+}
+
+.form label {
+  font-weight: bold;
+}
+.form input {
+  width: 3rem;
+  margin-left: 0.5rem;
+  border-radius: 3px;
+  border: 1px solid black;
+}

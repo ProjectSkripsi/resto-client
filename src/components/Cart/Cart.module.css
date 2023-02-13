@@ -1,0 +1,46 @@
+.cart {
+  font-size: large;
+  overflow-y: auto;
+}
+
+.amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.alt {
+  color: #8a2b06 !important;
+  background-color: #ffffff !important;
+  margin-right: 1rem;
+}
+.alt:hover,
+.alt:active {
+  background-color: #e7e7e7 !important;
+}
+
+.empty {
+  border-bottom: 1px solid #8a2b06;
+  margin-bottom: 0.25rem;
+  padding-bottom: 1rem;
+  font-size: small;
+}
+
+.delivery p {
+  font-size: small;
+  margin: 0.15rem;
+}
