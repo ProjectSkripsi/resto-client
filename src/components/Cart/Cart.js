@@ -176,7 +176,11 @@ const Cart = (props) => {
         ))}
 
         <h3>Total</h3>
-        <p>{totalAmount}</p>
+        <p>
+          {convertToRupiah(
+            Number((10 / 100) * cartCtx.totalAmount) + cartCtx.totalAmount
+          )}
+        </p>
       </div>
 
       <div className={styles.order}>
