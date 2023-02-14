@@ -70,7 +70,7 @@ const OrderPage = () => {
         </div>
         {itemMenus &&
           itemMenus.map((item) => <OrderItem key={item?._id} item={item} />)}
-        {isDone.length !== 0 && (
+        {isDone && isDone.length !== 0 && (
           <div
             onClick={() => getData()}
             style={{
