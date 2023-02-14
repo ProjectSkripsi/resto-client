@@ -6,6 +6,7 @@ import Button from '../UI/Button/Button';
 import CartItem from '../CartItem/CartItem';
 import Checkout from '../Checkout/Checkout';
 import { convertToRupiah } from '../../helpers/utils';
+import { NavLink } from 'react-router-dom';
 
 // Displays all CartItems to the user - updates CartContext when item amounts are changed from CartItem
 const Cart = (props) => {
@@ -60,26 +61,25 @@ const Cart = (props) => {
     }));
     userData.itemOrder = menu;
 
-    // setIsSubmitting(true);
-    // setCustomerData(userData);
-    // try {
-    //   await fetch(
-    //     'https://order-food-9b59a-default-rtdb.firebaseio.com/orders.json',
-    //     {
-    //       method: 'POST',
-    //       body: JSON.stringify({
-    //         user: userData,
-    //         orderedItems: cartCtx.items,
-    //         totalAmount: totalAmount
-    //       })
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.error(error.message);
-    // }
+    setIsSubmitting(true);
+    setCustomerData(userData);
 
-    // setIsSubmitting(false);
-    // setDidSubmit(true);
+    try {
+      const resp = await fetch('https://resto-app-bz58.onrender.com/api/order', {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: { 'Content-type': 'application/json; charset=UTF-8' }
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        localStorage.setItem('orderId', data?.data?._id);
+        setDidSubmit(true);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+    setIsSubmitting(false);
+    // const test = localStorage.getItem('orderId');
   };
 
   // Ensure the price always diplays to 2 decimal places
@@ -170,7 +170,12 @@ const Cart = (props) => {
 
       <div className={styles.order}>
         <Button onClick={closeOrderDetailsHandler} className={styles.alt}>
-          Tutup
+          <NavLink
+            to={`order/${localStorage.getItem('orderId')}`}
+            style={{ color: '#8a2b06', textDecoration: 'none' }}
+          >
+            Tutup
+          </NavLink>
         </Button>
       </div>
     </React.Fragment>
