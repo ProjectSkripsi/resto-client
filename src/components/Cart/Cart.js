@@ -104,10 +104,21 @@ const Cart = (props) => {
           />
         ))}
       </div>
-
+      <div className={styles.sub}>
+        <p>SubTotal</p>
+        <p>{totalAmount}</p>
+      </div>
       <div className={styles.amount}>
-        <h2>Jumlah Total</h2>
-        <h2>{totalAmount}</h2>
+        <p>PPN (10%)</p>
+        <p>{convertToRupiah(Number((10 / 100) * cartCtx.totalAmount))}</p>
+      </div>
+      <div className={styles.amount}>
+        <h2>Total</h2>
+        <h2>
+          {convertToRupiah(
+            Number((10 / 100) * cartCtx.totalAmount) + cartCtx.totalAmount
+          )}
+        </h2>
       </div>
       <div>
         {checkout && (
@@ -130,7 +141,7 @@ const Cart = (props) => {
             <Button onClick={props.onCloseCart} className={styles.alt}>
               Tutup
             </Button>
-            {hasItems && <Button onClick={orderButtonHandler}>Order</Button>}
+            {hasItems && <Button onClick={orderButtonHandler}>Pesan</Button>}
           </div>
         </div>
       )}
