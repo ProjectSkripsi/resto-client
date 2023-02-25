@@ -1,15 +1,15 @@
-import React, { useReducer } from "react";
-import CartContext from "./cart-context";
+import React, { useReducer } from 'react';
+import CartContext from './cart-context';
 
 // Initialize cart to be empty
 const defaultCartState = {
   items: [],
-  totalAmount: 0,
+  totalAmount: 0
 };
 
 const cartReducer = (state, action) => {
   //ADD ITEM
-  if (action.type === "ADD_ITEM") {
+  if (action.type === 'ADD_ITEM') {
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
 
@@ -25,7 +25,7 @@ const cartReducer = (state, action) => {
       // If item exists in cart, update item amount
       const updatedItem = {
         ...existingCartItem,
-        amount: existingCartItem.amount + action.item.amount,
+        amount: existingCartItem.amount + action.item.amount
       };
       updatedItems = [...state.items];
       updatedItems[existingItemIndex] = updatedItem;
@@ -37,12 +37,12 @@ const cartReducer = (state, action) => {
     // Return updated cart
     return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount,
+      totalAmount: updatedTotalAmount
     };
   }
 
   // REMOVE ITEM
-  if (action.type === "REMOVE_ITEM") {
+  if (action.type === 'REMOVE_ITEM') {
     // Fnd existing item in cart
     const existingItemIndex = state.items.findIndex(
       (item) => item.id === action.id
@@ -59,7 +59,7 @@ const cartReducer = (state, action) => {
       // Reuce amount by 1 if it's not the last item of its type
       const updatedItem = {
         ...existingCartItem,
-        amount: existingCartItem.amount - 1,
+        amount: existingCartItem.amount - 1
       };
       updatedItems = [...state.items];
       updatedItems[existingItemIndex] = updatedItem;
@@ -68,12 +68,12 @@ const cartReducer = (state, action) => {
     // Return updated cart
     return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount,
+      totalAmount: updatedTotalAmount
     };
   }
 
   // EMPTY CART
-  if (action.type === "EMPTY_CART") {
+  if (action.type === 'EMPTY_CART') {
     return defaultCartState;
   }
 
@@ -88,15 +88,15 @@ const CartProvider = (props) => {
   );
 
   const addItemHandler = (item) => {
-    dispatchCartAction({ type: "ADD_ITEM", item: item });
+    dispatchCartAction({ type: 'ADD_ITEM', item: item });
   };
 
   const removeItemHandler = (id) => {
-    dispatchCartAction({ type: "REMOVE_ITEM", id: id });
+    dispatchCartAction({ type: 'REMOVE_ITEM', id: id });
   };
 
   const emptyCartHandler = () => {
-    dispatchCartAction({ type: "EMPTY_CART" });
+    dispatchCartAction({ type: 'EMPTY_CART' });
   };
 
   const cartContext = {
@@ -104,7 +104,7 @@ const CartProvider = (props) => {
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
-    emptyCart: emptyCartHandler,
+    emptyCart: emptyCartHandler
   };
   return (
     <CartContext.Provider value={cartContext}>

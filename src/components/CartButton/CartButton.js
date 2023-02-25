@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import styles from "./CartButton.module.css";
-import CartContext from "../../store/cart-context";
-import CartIcon from "../CartIcon/CartIcon";
+import React, { useContext, useEffect, useState } from 'react';
+import styles from './CartButton.module.css';
+import CartContext from '../../store/cart-context';
+import CartIcon from '../CartIcon/CartIcon';
 
 // Allows user to open their Cart - displays current amount of items in Cart - animates when item is added to Cart
 const CartButton = (props) => {
@@ -15,9 +15,7 @@ const CartButton = (props) => {
 
   // Conditional CSS formatting for bump animation
   const [buttonHighlight, setButtonHighlight] = useState(false);
-  const buttonClasses = `${styles.button} ${
-    buttonHighlight ? styles.bump : ""
-  }`;
+  const buttonClasses = `${styles.button} ${buttonHighlight ? styles.bump : ''}`;
 
   useEffect(() => {
     // Verify Cart has items

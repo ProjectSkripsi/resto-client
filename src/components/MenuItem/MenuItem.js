@@ -10,12 +10,14 @@ const MenuItem = (props) => {
 
   // Updates CartContext with the amount of items the user wishes to add to cart
   const addToCartHandler = (amount) => {
-    cartCtx.addItem({
+    const data = {
       id: props.item.id,
       name: props.item.name,
       amount: amount,
       price: props.item.price
-    });
+    };
+
+    cartCtx.addItem(data);
   };
 
   // Ensure the price always diplays to 2 decimal places
