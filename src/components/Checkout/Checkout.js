@@ -48,8 +48,9 @@ const Checkout = (props) => {
   if (
     enteredNameIsValid &&
     enteredEmailIsValid &&
-    enteredPhoneIsValid &&
-    enteredAddressIsValid
+    enteredPhoneIsValid
+    // &&
+    // enteredAddressIsValid
   ) {
     formIsValid = true;
   }
@@ -67,7 +68,7 @@ const Checkout = (props) => {
       name: enteredName,
       email: enteredEmail,
       contact: enteredPhone,
-      tableId: enteredAddress
+      tableId: props?.table
     };
 
     props.onConfirmOrder(userDetails);
@@ -77,7 +78,7 @@ const Checkout = (props) => {
     nameResetHandler();
     emailResetHandler();
     phoneResetHandler();
-    addressResetHandler();
+    // addressResetHandler();
   };
 
   // If user chooses to go back instead of confirming their order
@@ -110,9 +111,10 @@ const Checkout = (props) => {
           <input
             onChange={addressChangeHandler}
             onBlur={addressBlurHandler}
-            value={enteredAddress}
+            value={props?.table}
             type="text"
             id="table"
+            disabled
           />
           {addressHasError && (
             <p className={styles.error}>No Meja tidak boleh kosong</p>

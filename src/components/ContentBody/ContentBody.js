@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styles from './ContentBody.module.css';
 import CartProvider from '../../store/CartProvider';
 import Header from '../Header/Header';
@@ -14,6 +14,7 @@ const ContentBody = (props) => {
   const cartCtx = useContext(CartContext);
   const [viewCart, setViewCart] = useState(false);
   const [scan, setScan] = useState(false);
+  const [table, setTable] = useState(false);
 
   const viewCartHandler = () => {
     setViewCart(true);
@@ -23,11 +24,22 @@ const ContentBody = (props) => {
     setViewCart(false);
   };
 
+  useEffect(() => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('table');
+    setTable(foo);
+  }, []);
+
   return (
     <div className={styles.content}>
       <CartProvider>
         {viewCart && (
-          <Cart onCloseCart={closeCartHandler} onOpenCart={viewCartHandler} />
+          <Cart
+            onCloseCart={closeCartHandler}
+            onOpenCart={viewCartHandler}
+            table={table}
+          />
         )}
         <Header onViewCart={viewCartHandler} scan={scan} />
         {!scan && <Banner />}

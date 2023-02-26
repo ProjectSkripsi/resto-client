@@ -16,7 +16,6 @@ const Cart = (props) => {
   const [didSubmit, setDidSubmit] = useState(false);
   const [customerData, setCustomerData] = useState({});
 
-  // Remove selected item from CartContext
   const removeItemHandler = (id) => {
     cartCtx.removeItem(id);
   };
@@ -125,6 +124,7 @@ const Cart = (props) => {
           <Checkout
             onConfirmOrder={submitOrderHandler}
             onCloseOrder={closeOrderHandler}
+            table={props.table}
           />
         )}
       </div>
@@ -162,7 +162,7 @@ const Cart = (props) => {
         </p>
 
         <h3>Detail Pelanggan</h3>
-        <p> Meja: {customerData.address}</p>
+        <p> Meja: {props.table}</p>
         <p>{customerData.name}</p>
         <p>
           {customerData.phone} / {customerData.email}
