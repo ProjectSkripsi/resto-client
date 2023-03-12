@@ -62,8 +62,8 @@ const Cart = (props) => {
 
     setIsSubmitting(true);
     setCustomerData(userData);
-
     try {
+      // const resp = await fetch('http://localhost:4000/api/order', {
       const resp = await fetch('https://resto-app-bz58.onrender.com/api/order', {
         method: 'POST',
         body: JSON.stringify(userData),
@@ -78,7 +78,7 @@ const Cart = (props) => {
       console.error(error.message);
     }
     setIsSubmitting(false);
-    // const test = localStorage.getItem('orderId');
+    const test = localStorage.getItem('orderId');
   };
 
   // Ensure the price always diplays to 2 decimal places

@@ -1,8 +1,30 @@
+import React, { useEffect, useState } from 'react';
 import styles from './Checkout.module.css';
 import Button from '../UI/Button/Button';
 import useInput from '../../hooks/use-input';
 
 const Checkout = (props) => {
+  const [tableNumber, setTable] = useState('');
+  useEffect(async () => {
+    try {
+      const resp = await fetch(
+        `https://resto-app-bz58.onrender.com/api/table/number/${props.table}`,
+        {
+          method: 'GET',
+
+          headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        }
+      );
+      if (resp.ok) {
+        const data = await resp.json();
+
+        setTable(data?.data?._id);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
+
   // Utilize custom hook for all input fields
   const {
     value: enteredName,
@@ -68,7 +90,8 @@ const Checkout = (props) => {
       name: enteredName,
       email: enteredEmail,
       contact: enteredPhone,
-      tableId: props?.table
+      tableId: props?.table,
+      tableNumber
     };
 
     props.onConfirmOrder(userDetails);
